@@ -1,0 +1,58 @@
+version: 2.1
+description: >-
+  An orb command to test if any un-tracked changes(to git commit) are present in the given path. 
+  This is useful to check if any auto-formatters(like black, codegen) have produced changes during CI validation.
+
+  ############################################
+  #          ---- Commands ----              #
+  # Command to check the un-tracked changes. #
+  ############################################
+
+commands:
+  check:
+    description: Check un-tracked changes in the given path
+    parameters:
+      path:
+        description: Path to check
+        type: string
+        default: "."
+    steps:
+      - run: 
+          name: Check un-tracked changes using git porcelain command
+          command: |
+            if [[ `git status <<parameters.path>> --porcelain` ]]
+            then
+              echo "ERROR: running the previous command has introduced changes. Hence, Failing the build."
+              git status --porcelain
+              exit 1
+            fi
+
+
+  ######################################
+  #   ---- Examples & Usage ----       #
+  ######################################
+
+examples:
+  format_test:
+    description: Test if the files are formatted
+    usage:
+      version: 2.1
+      orbs:
+        untracked_changes: niteo/check-untracked-changes@1.0.0
+      jobs:
+        test:
+          docker:
+            - image: circleci/python:3.7  # Can be any executor
+          steps:
+            - checkout
+
+            # Run auto formatter commands
+
+            # Fail if changes are produced
+            - untracked_changes/check:
+                path: "src/"
+      
+      workflows:
+        test-format:
+          jobs:
+            - test

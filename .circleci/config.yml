@@ -1,0 +1,37 @@
+version: 2.1
+
+executors:
+  cli:
+    docker:
+      - image: circleci/circleci-cli:0.1.2709
+
+jobs:
+  validate:
+    executor: cli
+    steps:
+      - checkout
+      - run:
+          name: Validate orb
+          command:
+            make validate
+
+  dev-release:
+    executor: cli
+    steps:
+      - checkout
+      - run:
+          name: Publish dev version of the orb
+          command: |
+            make dev-release
+
+workflows:
+  main:
+    jobs:
+      - validate
+
+      # CircleCI personal tokens are visible in the logs. Hence not publishing automatically until it is resolved (https://ideas.circleci.com/ideas/CCI-I-397).
+
+      # - dev-release:
+      #     requires:
+      #       - validate
+
