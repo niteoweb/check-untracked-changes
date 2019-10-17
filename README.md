@@ -1,8 +1,8 @@
 # Check Un-tracked Changes Orb
 [![CircleCI](https://circleci.com/gh/niteoweb/check-untracked-changes/tree/master.svg?style=svg&circle-token=2a9cb57945337d7999f3f325ffdd0569795157bf)](https://circleci.com/gh/niteoweb/check-untracked-changes/tree/master)
+[![CircleCI](https://img.shields.io/badge/orb-check--untracked--changes-blue?style=flat&logo=circleci)](https://circleci.com/orbs/registry/orb/niteo/check-untracked-changes)
 
-An orb to test if any un-tracked changes(to git commit) are present in the given path.
-This is useful to test if any auto-formatters(like black, codegen) have produced changes during CI validation. 
+An orb to test if any un-tracked changes(to git commit) are present in the given path. This is useful to test if any auto-formatters(like black, codegen) have produced changes during CI validation.
 
 
 ## Example Usage
@@ -10,7 +10,7 @@ This is useful to test if any auto-formatters(like black, codegen) have produced
 version: 2.1
 
 orbs:
-  untracked_changes: niteo/check-untracked-changes@1.0.0
+  untracked_changes: niteo/check-untracked-changes@1
 jobs:
   test:
       docker:
