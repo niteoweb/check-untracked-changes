@@ -1,12 +1,7 @@
 version: 2.1
-description: >-
-  An orb command to test if any un-tracked changes(to git commit) are present in the given path. 
-  This is useful to check if any auto-formatters(like black, codegen) have produced changes during CI validation.
+description: >
+  An orb command to test if any un-tracked changes(to git commit) are present in the given path. This is useful to check if any auto-formatters(like black, codegen) have produced changes during CI validation.
 
-  ############################################
-  #          ---- Commands ----              #
-  # Command to check the un-tracked changes. #
-  ############################################
 
 commands:
   check:
@@ -28,17 +23,13 @@ commands:
             fi
 
 
-  ######################################
-  #   ---- Examples & Usage ----       #
-  ######################################
-
 examples:
   format_test:
     description: Test if the files are formatted
     usage:
       version: 2.1
       orbs:
-        untracked_changes: niteo/check-untracked-changes@1.0.0
+        untracked_changes: niteo/check-untracked-changes@1
       jobs:
         test:
           docker:
